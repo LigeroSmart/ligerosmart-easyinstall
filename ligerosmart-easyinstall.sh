@@ -1,6 +1,11 @@
 #!/bin/sh
 
 # LigeroSmart for linux
+#
+# Using this command to run the script:
+#
+# curl https://get.ligerosmart.com | sh
+
 
 get_distribution() {
 	lsb_dist=""
