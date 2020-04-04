@@ -22,7 +22,7 @@ case "$lsb_dist" in
         ;;
 
 		centos|fedora)
-            yum install -y \
+            yum install -y -q \
                 git \
                 python3-pip
         ;;
