@@ -16,20 +16,20 @@ lsb_dist="$(echo "$lsb_dist" | tr '[:upper:]' '[:lower:]')"
 set -e
 
 case "$lsb_dist" in
-		ubuntu|debian|raspbian)
+        ubuntu|debian|raspbian)
             apt-get update
             apt-get install -y -qq --no-install-recommends \
                 git \
                 python3-pip
         ;;
 
-		centos|fedora)
+        centos|fedora)
             yum install -y -q \
                 git \
                 python3-pip
         ;;
 
-		*)
+        *)
 			if command_exists lsb_release; then
 				dist_version="$(lsb_release --release | cut -f2)"
 			fi
@@ -39,7 +39,7 @@ case "$lsb_dist" in
 
             echo "Installation on $dist_version not implemented yet"
             exit 1;
-		;;
+        ;;
 esac
 
 # Install
