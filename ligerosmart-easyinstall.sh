@@ -37,7 +37,7 @@ case "$lsb_dist" in
 				dist_version="$(. /etc/os-release && echo "$VERSION_ID")"
 			fi
 
-            echo "installation on $dist_version not implemented yet"
+            echo "Installation on $dist_version not implemented yet"
             exit 1;
 		;;
 esac
