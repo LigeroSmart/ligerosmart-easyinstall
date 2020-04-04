@@ -13,6 +13,8 @@ get_distribution() {
 lsb_dist=$( get_distribution )
 lsb_dist="$(echo "$lsb_dist" | tr '[:upper:]' '[:lower:]')"
 
+set -e
+
 case "$lsb_dist" in
 		ubuntu|debian|raspbian)
             apt-get update
