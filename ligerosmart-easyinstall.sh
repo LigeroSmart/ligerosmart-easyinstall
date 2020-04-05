@@ -38,7 +38,8 @@ case "$pkg_mgmt" in
         ;;
 
         *)
-            echo "Installation on $lsb_dist not implemented yet."
+            echo "Sorry! I don't detect a way to install packages on $lsb_dist distribution."
+            echo "Could you help us? Check https://github.com/LigeroSmart/ligerosmart-easyinstall"
             exit 1;
         ;;
 esac
