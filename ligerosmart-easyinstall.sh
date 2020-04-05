@@ -6,23 +6,14 @@
 #
 # curl https://get.ligerosmart.com | sh
 
-
-get_distribution() {
-	lsb_dist=""
-	if [ -r /etc/os-release ]; then
-		lsb_dist="$(. /etc/os-release && echo "$ID")"
-	fi
-	echo "$lsb_dist"
-}
-
-lsb_dist=$( get_distribution )
-lsb_dist="$(echo "$lsb_dist" | tr '[:upper:]' '[:lower:]')"
-
 command -v apt-get > /dev/null && pkg_mgmt=apt
 command -v yum > /dev/null && pkg_mgmt=yum
 
 set -e
 
+# Install
+
+# packages
 case "$pkg_mgmt" in
         apt)
             apt-get update
@@ -38,13 +29,11 @@ case "$pkg_mgmt" in
         ;;
 
         *)
-            echo "Sorry! I don't detect a way to install packages on $lsb_dist distribution."
+            echo "Sorry! I don't detect a way to install packages on your system."
             echo "Could you help us? Check https://github.com/LigeroSmart/ligerosmart-easyinstall"
             exit 1;
         ;;
 esac
-
-# Install
 
 ## docker 
 curl -fsSL https://get.docker.com | sh
