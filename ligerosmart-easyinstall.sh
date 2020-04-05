@@ -59,3 +59,6 @@ cd ligerosmart-stack
 cat README.md
 docker -v
 docker-compose -v
+
+# download and run LigeroSmart Stack
+# docker-compose up
