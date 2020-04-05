@@ -55,14 +55,18 @@ if [ $max_map_count -lt 262144 ]; then
 fi
 
 # Stack repository
-git clone https://github.com/LigeroSmart/ligerosmart-stack
-
+git clone https://github.com/LigeroSmart/ligerosmart-stack || true
 cd ligerosmart-stack
 
-# info
-cat README.md
+# show cmd versions
 docker -v
 docker-compose -v
 
-# download and run LigeroSmart Stack
-# docker-compose up
+# download and run at first time 
+docker-compose up -d
+
+# stack info
+cat README.md
+
+# services running info
+docker-compose ps
