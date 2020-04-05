@@ -1,7 +1,7 @@
 #!/bin/sh
-# LigeroSmart for linux
+# LigeroSmart for linux | https://ligerosmart.com | https://complemento.net.br | https://github.com/LigeroSmart
 #
-# Using this command to run the script:
+# Use this command to run the script:
 #
 # curl https://get.ligerosmart.com | sh
 
