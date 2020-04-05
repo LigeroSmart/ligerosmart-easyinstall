@@ -19,5 +19,6 @@
 # Download this repository https://github.com/LigeroSmart/ligerosmart-stack
 # and run the docker-compose command in there:
 #
+# docker-compose up
 #  
 # Could you help us? Check https://github.com/LigeroSmart/ligerosmart-easyinstall
