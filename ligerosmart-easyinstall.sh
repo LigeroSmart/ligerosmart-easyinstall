@@ -18,17 +18,20 @@ get_distribution() {
 lsb_dist=$( get_distribution )
 lsb_dist="$(echo "$lsb_dist" | tr '[:upper:]' '[:lower:]')"
 
+command -v apt-get > /dev/null && pkg_mgmt=apt
+command -v yum > /dev/null && pkg_mgmt=yum
+
 set -e
 
-case "$lsb_dist" in
-        ubuntu|debian|raspbian)
+case "$pkg_mgmt" in
+        apt)
             apt-get update
             apt-get install -y -qq --no-install-recommends \
                 git \
                 python3-pip
         ;;
 
-        centos|fedora)
+        yum)
             yum install -y -q \
                 git \
                 python3-pip
