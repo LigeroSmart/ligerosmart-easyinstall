@@ -9,15 +9,12 @@ command -v apt-get > /dev/null && pkg_mgmt=apt
 command -v yum > /dev/null && pkg_mgmt=yum
 command -v git > /dev/null || install_packages=1
 command -v pip3 > /dev/null || install_packages=1
-command -v docker > /dev/null || install_packages=1
-command -v docker-compose > /dev/null || install_packages=1
+command -v docker > /dev/null || install_docker=1
+command -v docker-compose > /dev/null || install_dockercompose=1
 
 set -e
 
-# Install
 if [ $install_packages ]; then
-
-    ## packages
     case "$pkg_mgmt" in
             apt)
                 apt-get update
@@ -38,14 +35,15 @@ if [ $install_packages ]; then
                 exit 1;
             ;;
     esac
+fi;
 
-    ## docker 
+if [ $install_docker ]; then
     curl -fsSL https://get.docker.com | sh
+fi;
 
-    ## docker-compose
+if [ $install_dockercompose ]; then
     pip3 install setuptools
     pip3 install docker-compose
-
 fi;
 
 ## Kernel config for elasticsearch
