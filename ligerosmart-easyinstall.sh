@@ -47,6 +47,7 @@ if [ $install_packages ]; then
     curl -fsSL https://get.docker.com | sh
 
     ## docker-compose
+    pip3 install setuptools
     pip3 install docker-compose
 
 fi;
