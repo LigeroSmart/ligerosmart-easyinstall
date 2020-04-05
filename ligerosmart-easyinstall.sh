@@ -30,7 +30,7 @@ if [ $install_packages ]; then
             ;;
 
             *)
-                echo "Sorry! I don't detect how to install packages on your system."
+                echo "Sorry! I did not detect the package manager for this system"
                 echo "Could you help us? Check https://github.com/LigeroSmart/ligerosmart-easyinstall"
                 exit 1;
             ;;
