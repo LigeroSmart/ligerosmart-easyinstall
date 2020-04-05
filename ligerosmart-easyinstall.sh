@@ -1,5 +1,5 @@
 #!/bin/sh
-# LigeroSmart for linux | https://ligerosmart.com | https://complemento.net.br | https://github.com/LigeroSmart
+# LigeroSmart Easy Install for linux | https://ligerosmart.com | https://complemento.net.br | https://github.com/LigeroSmart
 #
 # Use this command to run the script:
 #
