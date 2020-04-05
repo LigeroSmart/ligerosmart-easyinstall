@@ -20,4 +20,4 @@
 # and run the docker-compose command in there:
 #
 #  
-# Can you help us? Check https://github.com/LigeroSmart/ligerosmart-easyinstall
+# Could you help us? Check https://github.com/LigeroSmart/ligerosmart-easyinstall
