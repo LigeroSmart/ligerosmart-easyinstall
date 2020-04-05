@@ -8,38 +8,48 @@
 
 command -v apt-get > /dev/null && pkg_mgmt=apt
 command -v yum > /dev/null && pkg_mgmt=yum
+command -v git > /dev/null || install_packages=1
+command -v pip3 > /dev/null || install_packages=1
+command -v docker > /dev/null || install_packages=1
+command -v docker-compose > /dev/null || install_packages=1
 
 set -e
 
 # Install
 
 # packages
-case "$pkg_mgmt" in
-        apt)
-            apt-get update
-            apt-get install -y -qq --no-install-recommends \
-                git \
-                python3-pip
-        ;;
+if [ $install_packages ]; then
 
-        yum)
-            yum install -y -q \
-                git \
-                python3-pip
-        ;;
+    echo "Installing packages"
 
-        *)
-            echo "Sorry! I don't detect a way to install packages on your system."
-            echo "Could you help us? Check https://github.com/LigeroSmart/ligerosmart-easyinstall"
-            exit 1;
-        ;;
-esac
+    case "$pkg_mgmt" in
+            apt)
+                apt-get update
+                apt-get install -y --no-install-recommends \
+                    git \
+                    python3-pip
+            ;;
 
-## docker 
-curl -fsSL https://get.docker.com | sh
+            yum)
+                yum install -y \
+                    git \
+                    python3-pip
+            ;;
 
-## docker-compose
-pip3 install docker-compose
+            *)
+                echo "Sorry! I don't detect a way to install packages on your system."
+                echo "Could you help us? Check https://github.com/LigeroSmart/ligerosmart-easyinstall"
+                exit 1;
+            ;;
+    esac
+
+    ## docker 
+    curl -fsSL https://get.docker.com | sh
+
+    ## docker-compose
+    pip3 install docker-compose
+
+fi;
 
 
 # Kernel config
