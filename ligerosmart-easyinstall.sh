@@ -20,8 +20,6 @@ set -e
 # packages
 if [ $install_packages ]; then
 
-    echo "Installing packages"
-
     case "$pkg_mgmt" in
             apt)
                 apt-get update
@@ -52,10 +50,7 @@ if [ $install_packages ]; then
 
 fi;
 
-
-# Kernel config
-
-## elasticsearch
+## Kernel config for elasticsearch
 sysctl -w vm.max_map_count=262144
 echo 'sysctl -w vm.max_map_count=262144' > /etc/sysctl.d/elasticsearch.conf
 
