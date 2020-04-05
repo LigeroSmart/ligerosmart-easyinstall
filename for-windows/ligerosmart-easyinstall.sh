@@ -3,6 +3,7 @@
 # Sorry... This is not implemented yet :/
 #
 # But you can visit this sites references about docker on windows:
+# * https://docs.docker.com/docker-for-windows/
 # * https://docs.microsoft.com/pt-br/virtualization/windowscontainers/
 # * https://docs.microsoft.com/en-us/virtualization/windowscontainers/quick-start/set-up-environment?tabs=Windows-Server
 # * https://github.com/MicrosoftDocs/Virtualization-Documentation
