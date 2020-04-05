@@ -35,14 +35,7 @@ case "$lsb_dist" in
         ;;
 
         *)
-            if command_exists lsb_release; then
-            	dist_version="$(lsb_release --release | cut -f2)"
-            fi
-            if [ -z "$dist_version" ] && [ -r /etc/os-release ]; then
-            	dist_version="$(. /etc/os-release && echo "$VERSION_ID")"
-            fi
-
-            echo "Installation on $dist_version not implemented yet"
+            echo "Installation on $lsb_dist not implemented yet."
             exit 1;
         ;;
 esac
