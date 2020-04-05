@@ -1,5 +1,4 @@
 #!/bin/sh
-
 # LigeroSmart for linux
 #
 # Using this command to run the script:
@@ -16,10 +15,9 @@ command -v docker-compose > /dev/null || install_packages=1
 set -e
 
 # Install
-
-# packages
 if [ $install_packages ]; then
 
+    ## packages
     case "$pkg_mgmt" in
             apt)
                 apt-get update
