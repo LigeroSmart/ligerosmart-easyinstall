@@ -7,6 +7,7 @@
 
 command -v apt-get > /dev/null && pkg_mgmt=apt
 command -v yum > /dev/null && pkg_mgmt=yum
+command -v systemctl > /dev/null && systemctl_cmd=1
 command -v git > /dev/null || install_packages=1
 command -v pip3 > /dev/null || install_packages=1
 command -v docker > /dev/null || install_docker=1
@@ -39,6 +40,9 @@ fi;
 
 if [ $install_docker ]; then
     curl -fsSL https://get.docker.com | sh
+    if [ $systemctl_cmd ]; then
+        systemctl enable docker && systemctl start docker
+    fi;
 fi;
 
 if [ $install_dockercompose ]; then
