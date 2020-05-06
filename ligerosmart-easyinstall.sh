@@ -39,10 +39,11 @@ if [ $install_packages ]; then
 fi;
 
 if [ $install_docker ]; then
-    curl -fsSL https://get.docker.com | sh
-    command -v docker > /dev/null
-    if [ $? != 0 ] && [ $pkg_mgmt == 'apt' ]; then
+    hostnamectl | grep 'Ubuntu 20.04' > /dev/null
+    if [ $? == 0 ]; then
         apt install docker.io
+    else 
+        curl -fsSL https://get.docker.com | sh
     fi
     if [ $systemctl_cmd ]; then
         systemctl enable docker && systemctl start docker
