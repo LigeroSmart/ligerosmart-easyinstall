@@ -40,6 +40,10 @@ fi;
 
 if [ $install_docker ]; then
     curl -fsSL https://get.docker.com | sh
+    command -v docker > /dev/null
+    if [ $? != 0 ] && [ $pkg_mgmt == 'apt' ]; then
+        apt install docker.io
+    fi
     if [ $systemctl_cmd ]; then
         systemctl enable docker && systemctl start docker
     fi;
