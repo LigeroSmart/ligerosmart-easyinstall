@@ -74,6 +74,8 @@ docker-compose up -d
 
 # stack info
 cat README.md
+echo -e "\n-----------------\n"
 
 # services running info
+echo "Services status:"
 docker-compose ps
