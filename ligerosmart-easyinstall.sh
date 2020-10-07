@@ -13,8 +13,6 @@ command -v pip3 > /dev/null || install_packages=1
 command -v docker > /dev/null || install_docker=1
 command -v docker-compose > /dev/null || install_dockercompose=1
 
-set -e
-
 if [ $install_packages ]; then
     case "$pkg_mgmt" in
             apt)
