@@ -69,6 +69,9 @@ cd ligerosmart-stack
 docker -v
 docker-compose -v
 
+# force pull images
+docker-compose pull
+
 # download and run at first time 
 docker-compose up -d
 
