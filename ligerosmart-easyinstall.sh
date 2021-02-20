@@ -49,6 +49,7 @@ if [ $install_docker ]; then
 fi;
 
 if [ $install_dockercompose ]; then
+    python3 -m pip install --upgrade pip
     pip3 install setuptools
     pip3 install docker-compose
 fi;
