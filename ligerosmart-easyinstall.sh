@@ -4,6 +4,15 @@
 # Use this command to run the script:
 #
 # curl https://get.ligerosmart.com | sh
+#
+# You can pass the branch to be used for the respective stack with the BRANCH variable.
+#
+#  curl https://get.ligerosmart.com | BRANCH=dev sh
+#
+# See the list of branches available at https://github.com/LigeroSmart/ligerosmart-stack/branches
+# 
+
+BRANCH=${BRANCH:-main}
 
 command -v apt-get > /dev/null && pkg_mgmt=apt
 command -v yum > /dev/null && pkg_mgmt=yum
@@ -63,7 +72,7 @@ if [ ! -z $max_map_count ] && [ $max_map_count -lt 262144 ]; then
 fi
 
 # Stack repository
-git clone https://github.com/LigeroSmart/ligerosmart-stack || true
+git clone --branch=$BRANCH https://github.com/LigeroSmart/ligerosmart-stack || true
 cd ligerosmart-stack
 
 # show cmd versions
