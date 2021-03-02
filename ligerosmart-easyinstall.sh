@@ -10,11 +10,14 @@
 #     # Development stack (nginx+plack with DEBUG_MODE on)
 #     curl https://get.ligerosmart.com | BRANCH=dev sh
 #
-#     # PostgreSQL support
+#     # Database service with PostgreSQL
 #     curl https://get.ligerosmart.com | BRANCH=postgresql sh
 #
-#     # MariaDB support
+#     # Database service with MariaDB
 #     curl https://get.ligerosmart.com | BRANCH=mariadb sh
+#
+#     # Ingress service with Traefik
+#     curl https://get.ligerosmart.com | BRANCH=traefik sh
 #
 # See the list of branches available at https://github.com/LigeroSmart/ligerosmart-stack/branches
 # 
