@@ -7,7 +7,14 @@
 #
 # You can pass the branch to be used for the respective stack with the BRANCH variable.
 #
+#     # Development stack (nginx+plack with DEBUG_MODE on)
 #     curl https://get.ligerosmart.com | BRANCH=dev sh
+#
+#     # PostgreSQL support
+#     curl https://get.ligerosmart.com | BRANCH=postgresql sh
+#
+#     # MariaDB support
+#     curl https://get.ligerosmart.com | BRANCH=mariadb sh
 #
 # See the list of branches available at https://github.com/LigeroSmart/ligerosmart-stack/branches
 # 
