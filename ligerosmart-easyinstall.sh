@@ -3,11 +3,11 @@
 #
 # Use this command to run the script:
 #
-# curl https://get.ligerosmart.com | sh
+#     curl https://get.ligerosmart.com | sh
 #
 # You can pass the branch to be used for the respective stack with the BRANCH variable.
 #
-#  curl https://get.ligerosmart.com | BRANCH=dev sh
+#     curl https://get.ligerosmart.com | BRANCH=dev sh
 #
 # See the list of branches available at https://github.com/LigeroSmart/ligerosmart-stack/branches
 # 
