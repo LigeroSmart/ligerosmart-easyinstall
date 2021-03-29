@@ -20,7 +20,15 @@
 #     curl https://get.ligerosmart.com | BRANCH=traefik sh
 #
 # See the list of branches available at https://github.com/LigeroSmart/ligerosmart-stack/branches
+#
+# You can also create an .env file and in the same directory the stack will be created with the information from this file
+#
+#     echo "PROJECT_NAME=newproject" > .env
+#     curl https://get.ligerosmart.com | sh
+#
+# Have fun!
 # 
+
 
 # to read your local .env file if exists and creating project as you wish
 [ -f .env ] && . ./.env
