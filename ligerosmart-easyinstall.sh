@@ -5,7 +5,16 @@
 #
 #     curl https://get.ligerosmart.com | sh
 #
-# You can pass the branch to be used for the respective stack with the BRANCH variable.
+# Environment variables permitted are:
+#
+#      PROJECT_NAME=ligerosmart-stack
+#            The project name will be created and used to directory name and containers suffix
+#
+#      BRANCH=[main|dev|postgresql|mariadb|traefik]
+#            You can pass the branch to be used for the respective stack with the BRANCH variable.
+#            See the list of branches available at https://github.com/LigeroSmart/ligerosmart-stack/branches
+#
+# Examples:
 #
 #     # Development stack (nginx+plack with DEBUG_MODE on)
 #     curl https://get.ligerosmart.com | BRANCH=dev sh
@@ -19,12 +28,11 @@
 #     # Ingress service with Traefik
 #     curl https://get.ligerosmart.com | BRANCH=traefik sh
 #
-# See the list of branches available at https://github.com/LigeroSmart/ligerosmart-stack/branches
+# ENVIRONMENT FILE
+#     You can also create an .env file and in the same directory the stack will be created with the information from this file
 #
-# You can also create an .env file and in the same directory the stack will be created with the information from this file
-#
-#     echo "PROJECT_NAME=newproject" > .env
-#     curl https://get.ligerosmart.com | sh
+#          echo "PROJECT_NAME=newproject" > .env
+#          curl https://get.ligerosmart.com | sh
 #
 # Have fun!
 # 
