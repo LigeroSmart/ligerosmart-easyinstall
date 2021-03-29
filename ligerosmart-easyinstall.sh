@@ -1,32 +1,30 @@
 #!/bin/sh
 # LigeroSmart Easy Install for linux | https://ligerosmart.com | https://complemento.net.br | https://github.com/LigeroSmart
 #
-# Use this command to run the script:
+# HOW TO:
 #
-#     curl https://get.ligerosmart.com | sh
+#     Use this command to run the script:
 #
-# Environment variables permitted are:
+#          curl https://get.ligerosmart.com | sh
+#
+# ENVIRONMENT VARIABLES:
 #
 #      PROJECT_NAME=ligerosmart-stack
 #            The project name will be created and used to directory name and containers suffix
 #
 #      BRANCH=[main|dev|postgresql|mariadb|traefik]
-#            You can pass the branch to be used for the respective stack with the BRANCH variable.
+#            You can pass the branch to be used in repository.
 #            See the list of branches available at https://github.com/LigeroSmart/ligerosmart-stack/branches
 #
-# Examples:
+# EXAMPLES:
 #
-#     # Development stack (nginx+plack with DEBUG_MODE on)
-#     curl https://get.ligerosmart.com | BRANCH=dev sh
+#     Development stack (nginx+plack with DEBUG_MODE on)
 #
-#     # Database service with PostgreSQL
-#     curl https://get.ligerosmart.com | BRANCH=postgresql sh
+#          curl https://get.ligerosmart.com | BRANCH=dev sh
 #
-#     # Database service with MariaDB
-#     curl https://get.ligerosmart.com | BRANCH=mariadb sh
+#     Database service with MariaDB with project name myproject
 #
-#     # Ingress service with Traefik
-#     curl https://get.ligerosmart.com | BRANCH=traefik sh
+#          curl https://get.ligerosmart.com | BRANCH=mariadb PROJECT_NAME=myproject sh
 #
 # ENVIRONMENT FILE
 #     You can also create an .env file and in the same directory the stack will be created with the information from this file
