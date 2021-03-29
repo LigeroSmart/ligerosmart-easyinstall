@@ -30,9 +30,6 @@
 # 
 
 
-# to read your local .env file if exists and creating project as you wish
-[ -f .env ] && . ./.env
-
 # default values
 BRANCH=${BRANCH:-main}
 PROJECT_NAME=${PROJECT_NAME:-ligerosmart-stack}
@@ -44,6 +41,9 @@ command -v git > /dev/null || install_packages=1
 command -v pip3 > /dev/null || install_packages=1
 command -v docker > /dev/null || install_docker=1
 command -v docker-compose > /dev/null || install_dockercompose=1
+
+# to read your local .env file if exists and creating project as you wish
+[ -f .env ] && . ./.env
 
 if [ $install_packages ]; then
     case "$pkg_mgmt" in
