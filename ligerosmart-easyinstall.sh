@@ -22,6 +22,10 @@
 # See the list of branches available at https://github.com/LigeroSmart/ligerosmart-stack/branches
 # 
 
+# read your loca .env file if exists and creating project as you wish
+[ -f .env ] && source .env
+
+# default values
 BRANCH=${BRANCH:-main}
 
 command -v apt-get > /dev/null && pkg_mgmt=apt
