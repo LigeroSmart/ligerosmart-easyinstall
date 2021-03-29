@@ -88,7 +88,7 @@ fi
 
 # Stack repository
 git clone --branch=$BRANCH https://github.com/LigeroSmart/ligerosmart-stack $PROJECT_NAME || true
-cd ligerosmart-stack
+cd $PROJECT_NAME
 
 # show cmd versions
 docker -v
