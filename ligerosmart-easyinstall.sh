@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # LigeroSmart Easy Install for linux | https://ligerosmart.com | https://complemento.net.br | https://github.com/LigeroSmart
 #
 # Use this command to run the script:
