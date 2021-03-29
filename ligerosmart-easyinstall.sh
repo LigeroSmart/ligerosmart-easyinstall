@@ -116,14 +116,13 @@ docker-compose up -d
 
 # stack info
 cat README.md
-echo -e "\n-----------------\n"
-
-# env information
-echo "Environment information:"
-echo "Project name: $PROJECT_NAME"
-echo "      Branch: $BRANCH"
-echo "   Directory: $(pwd)"
 echo ""
-# services running info
+echo "-----------------------------------------------------------------------------------------------------------"
+echo ""
+# environment info
+echo "Environment information:"
+echo "   Project name: $PROJECT_NAME"
+echo "         Branch: $BRANCH"
+echo "      Directory: $(pwd)"
 echo "Services status:"
 docker-compose ps
