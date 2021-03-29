@@ -22,7 +22,7 @@
 # See the list of branches available at https://github.com/LigeroSmart/ligerosmart-stack/branches
 # 
 
-# read your loca .env file if exists and creating project as you wish
+# to read your local .env file if exists and creating project as you wish
 [ -f .env ] && . ./.env
 
 # default values
