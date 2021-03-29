@@ -22,7 +22,7 @@
 #
 #          curl https://get.ligerosmart.com | BRANCH=dev sh
 #
-#     Database service with MariaDB with project name myproject
+#     Branch mariadb (compose with MariaDB as database service) and project name myproject
 #
 #          curl https://get.ligerosmart.com | BRANCH=mariadb PROJECT_NAME=myproject sh
 #
