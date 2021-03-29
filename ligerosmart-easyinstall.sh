@@ -27,6 +27,7 @@
 
 # default values
 BRANCH=${BRANCH:-main}
+PROJECT_NAME=${PROJECT_NAME:-ligerosmart-stack}
 
 command -v apt-get > /dev/null && pkg_mgmt=apt
 command -v yum > /dev/null && pkg_mgmt=yum
@@ -86,7 +87,7 @@ if [ ! -z $max_map_count ] && [ $max_map_count -lt 262144 ]; then
 fi
 
 # Stack repository
-git clone --branch=$BRANCH https://github.com/LigeroSmart/ligerosmart-stack || true
+git clone --branch=$BRANCH https://github.com/LigeroSmart/ligerosmart-stack $PROJECT_NAME || true
 cd ligerosmart-stack
 
 # show cmd versions
