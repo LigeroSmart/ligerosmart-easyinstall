@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 # LigeroSmart Easy Install for linux | https://ligerosmart.com | https://complemento.net.br | https://github.com/LigeroSmart
 #
 # Use this command to run the script:
@@ -23,7 +23,7 @@
 # 
 
 # read your loca .env file if exists and creating project as you wish
-[ -f .env ] && source .env
+[ -f .env ] && . ./.env
 
 # default values
 BRANCH=${BRANCH:-main}
