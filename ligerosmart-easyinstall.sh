@@ -122,7 +122,7 @@ echo -e "\n-----------------\n"
 echo "Environment information:"
 echo "Project name: $PROJECT_NAME"
 echo "      Branch: $BRANCH"
-echo "   Directory: $(pwd)/$PROJECT_NAME"
+echo "   Directory: $(pwd)"
 echo ""
 # services running info
 echo "Services status:"
