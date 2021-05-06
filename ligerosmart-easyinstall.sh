@@ -76,7 +76,7 @@ fi;
 
 if [ $install_docker ]; then
     hostnamectl | grep 'Ubuntu 20.04' > /dev/null
-    if [ $? == 0 ]; then
+    if [ $? -eq 0 ]; then
         apt install docker.io
     else 
         curl -fsSL https://get.docker.com | sh
