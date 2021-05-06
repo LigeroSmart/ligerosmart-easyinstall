@@ -93,8 +93,8 @@ if [ $install_dockercompose ]; then
 fi;
 
 ## Kernel config for elasticsearch
-max_map_count=$(sysctl -n vm.max_map_count || echo "")
-if [ ! -z $max_map_count ] && [ $max_map_count -lt 262144 ]; then
+max_map_count=$(sysctl -n vm.max_map_count || echo 0)
+if [ $max_map_count -lt 262144 ]; then
     echo "The elasticsearch service will not run with max_map_count=$max_map_count. I will try to increase it"
     sysctl -w vm.max_map_count=262144
     echo 'sysctl -w vm.max_map_count=262144' > /etc/sysctl.d/elasticsearch.conf
