@@ -35,11 +35,7 @@
 # Have fun!
 # 
 
-
-# default values
-BRANCH=${BRANCH:-main}
-PROJECT_NAME=${PROJECT_NAME:-ligerosmart-stack}
-
+# commands detection
 command -v apt-get > /dev/null && pkg_mgmt=apt
 command -v yum > /dev/null && pkg_mgmt=yum
 command -v systemctl > /dev/null && systemctl_cmd=1
@@ -50,6 +46,12 @@ command -v docker-compose > /dev/null || install_dockercompose=1
 
 # to read your local .env file if exists and creating project as you wish
 [ -f .env ] && . ./.env
+
+# default values
+export BRANCH=${BRANCH:-main}
+export PROJECT_NAME=${PROJECT_NAME:-ligerosmart-stack}
+export WEBSERVER_FQDN=${WEBSERVER_FQDN:-`hostname -f`}
+export ACME_EMAIL
 
 if [ $install_packages ]; then
     case "$pkg_mgmt" in
