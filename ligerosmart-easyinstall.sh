@@ -92,6 +92,11 @@ if [ $install_dockercompose ]; then
     python3 -m pip install --upgrade pip
     pip3 install setuptools
     pip3 install docker-compose
+
+    # docker-compose link
+    if [ -f /usr/local/bin/docker-compose ]; then
+        ln -sf /usr/local/bin/docker-compose /usr/bin/docker-compose
+    fi;
 fi;
 
 ## Kernel config for elasticsearch
@@ -105,12 +110,6 @@ fi
 # Stack repository
 git clone --branch=$BRANCH https://github.com/LigeroSmart/ligerosmart-stack $PROJECT_NAME || true
 cd $PROJECT_NAME
-
-
-# docker-compose link
-if [ -f /usr/local/bin/docker-compose ]; then
-    ln -sf /usr/local/bin/docker-compose /usr/bin/docker-compose
-fi;
 
 # show cmd versions
 docker -v
