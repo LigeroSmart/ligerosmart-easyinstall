@@ -106,6 +106,12 @@ fi
 git clone --branch=$BRANCH https://github.com/LigeroSmart/ligerosmart-stack $PROJECT_NAME || true
 cd $PROJECT_NAME
 
+
+# docker-compose link
+if [ -f /usr/local/bin/docker-compose ]; then
+    ln -sf /usr/local/bin/docker-compose /usr/bin/docker-compose
+fi;
+
 # show cmd versions
 docker -v
 docker-compose -v
