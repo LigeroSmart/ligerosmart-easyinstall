@@ -52,6 +52,7 @@ export BRANCH=${BRANCH:-main}
 export PROJECT_NAME=${PROJECT_NAME:-ligerosmart-stack}
 export WEBSERVER_FQDN=${WEBSERVER_FQDN:-`hostname -f`}
 export ACME_EMAIL
+installation_only=${installation_only:-0}
 
 if [ $install_packages ]; then
     case "$pkg_mgmt" in
@@ -106,6 +107,8 @@ if [ $max_map_count -lt 262144 ]; then
     sysctl -w vm.max_map_count=262144
     echo 'vm.max_map_count=262144' > /etc/sysctl.d/elasticsearch.conf
 fi
+
+if [ $installation_only ] && exit 0;
 
 # Stack repository
 git clone --branch=$BRANCH https://github.com/LigeroSmart/ligerosmart-stack $PROJECT_NAME || true
