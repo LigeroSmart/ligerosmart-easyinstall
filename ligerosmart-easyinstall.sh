@@ -108,7 +108,9 @@ if [ $max_map_count -lt 262144 ]; then
     echo 'vm.max_map_count=262144' > /etc/sysctl.d/elasticsearch.conf
 fi
 
-if [ $installation_only ] && exit 0;
+if [ $installation_only ]; then 
+    exit 0; 
+fi;
 
 # Stack repository
 git clone --branch=$BRANCH https://github.com/LigeroSmart/ligerosmart-stack $PROJECT_NAME || true
