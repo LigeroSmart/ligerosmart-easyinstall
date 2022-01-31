@@ -108,10 +108,10 @@ if [ -f /proc/sys/vm/max_map_count ]; then
         sysctl -w vm.max_map_count=262144
         echo 'vm.max_map_count=262144' > /etc/sysctl.d/elasticsearch.conf
     fi
+fi
 
-    if [ $installation_only ]; then 
-        exit 0; 
-    fi;
+if [ $installation_only ]; then 
+    exit 0; 
 fi;
 
 # Stack repository
