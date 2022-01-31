@@ -110,7 +110,7 @@ if [ -f /proc/sys/vm/max_map_count ]; then
     fi
 fi
 
-if [ $installation_only ]; then 
+if [ "$installation_only" == "1" ]; then 
     exit 0; 
 fi;
 
