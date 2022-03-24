@@ -77,10 +77,10 @@ if [ $install_packages ]; then
     esac
 fi;
 
-if [ $install_docker ]; then
-    hostnamectl | grep 'Ubuntu 20.04' > /dev/null
+if [ "$install_docker" ]; then
+    hostnamectl | grep 'Ubuntu' > /dev/null
     if [ $? -eq 0 ]; then
-        apt install docker.io
+        apt install docker.io -y
     else 
         curl -fsSL https://get.docker.com | sh
     fi
@@ -89,7 +89,7 @@ if [ $install_docker ]; then
     fi;
 fi;
 
-if [ $install_dockercompose ]; then
+if [ "$install_dockercompose" ]; then
     python3 -m pip install --upgrade pip
     pip3 install setuptools
     pip3 install docker-compose
