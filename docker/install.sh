@@ -16,10 +16,6 @@ command -v docker-compose > /dev/null || install_dockercompose=1
 [ -f .env ] && . ./.env
 
 # default values
-export BRANCH=${BRANCH:-main}
-export PROJECT_NAME=${PROJECT_NAME:-ligerosmart-stack}
-export WEBSERVER_FQDN=${WEBSERVER_FQDN:-`hostname -f`}
-export ACME_EMAIL
 installation_only=${installation_only:-0}
 
 if [ $install_packages ]; then
