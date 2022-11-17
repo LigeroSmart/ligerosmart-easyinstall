@@ -26,7 +26,8 @@ if [ $install_packages ]; then
                     git \
                     python3-pip \
                     ncdu \
-                    htop
+                    htop \
+                    rsync
             ;;
 
             yum)
@@ -34,7 +35,8 @@ if [ $install_packages ]; then
                     git \
                     python3-pip \
                     ncdu \
-                    htop
+                    htop \
+                    rsync
             ;;
 
             *)
