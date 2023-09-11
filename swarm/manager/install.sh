@@ -70,6 +70,8 @@ if [ "$install_dockercompose" ]; then
     fi;
 fi;
 
+ADVERTISE_INTERFACE=`ip -br a | grep -v 127.0 |  ip -br a | grep -v 127.0 | head -n 1 | cut -f 1 -d " "`
+
 echo "Docker Info"
 docker info
 
@@ -77,7 +79,7 @@ echo "Docker Networks"
 docker network ls
 
 echo "Docker Swarm Init"
-docker swarm init
+docker swarm init --advertise-addr ${ADVERTISE_INTERFACE}:2377 
 
 echo "Docker Ingress network"
 docker network create --driver=overlay web
