@@ -70,7 +70,7 @@ if [ "$install_dockercompose" ]; then
     fi;
 fi;
 
-ADVERTISE_INTERFACE=`ip -br a | grep -v 127.0 |  ip -br a | grep -v 127.0 | head -n 1 | cut -f 1 -d " "`
+ADVERTISE_INTERFACE=${ADVERTISE_INTERFACE:-`ip -br a | grep -v 127.0 |  ip -br a | grep -v 127.0 | head -n 1 | cut -f 1 -d " "`}
 
 echo "Docker Info"
 docker info
