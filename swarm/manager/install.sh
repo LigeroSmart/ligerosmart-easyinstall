@@ -83,6 +83,8 @@ if [ -f /proc/sys/vm/max_map_count ]; then
 fi
 
 ADVERTISE_INTERFACE=${ADVERTISE_INTERFACE:-`ip -br a | grep -v 127.0 | head -n 1 | cut -f 1 -d " "`}
+ADVERTISE_IP=`ip -br a | grep $ADVERTISE_INTERFACE | grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'`
+ADVERTISE_IP=${ADVERTISE_IP:-"server_ip"}
 PORTAINER_USERNAME=${PORTAINER_USERNAME:-"admin"}
 PORTAINER_PASSWORD=${PORTAINER_PASSWORD:-"portainer#12"}
 
@@ -121,7 +123,7 @@ curl -X POST http://localhost:9000/api/users/admin/init \
   -d "{ \"Username\": \"$PORTAINER_USERNAME\", \"Password\": \"$PORTAINER_PASSWORD\" }" > /dev/null
 
 if [ "$?" == "0" ]; then 
-  echo "Access: http://[server_ip]:9000"
+  echo "Access: http://$ADVERTISE_IP:9000"
   echo "Username: $PORTAINER_USERNAME"
   echo "Password: $PORTAINER_PASSWORD" 
 fi
