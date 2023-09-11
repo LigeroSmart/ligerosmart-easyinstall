@@ -114,11 +114,14 @@ while true; do
     if [ "$?" == "0" ]; then break; fi
 done
 
+echo "Portainer started"
+
 curl -X POST http://localhost:9000/api/users/admin/init \
   -H 'Content-Type: application/json' \
   -d "{ \"Username\": \"$PORTAINER_USERNAME\", \"Password\": \"$PORTAINER_PASSWORD\" }" > /dev/null
 
-echo "Portainer started"
-echo "Username: $PORTAINER_USERNAME"
-echo "Password: $PORTAINER_PASSWORD" 
-
+if [ "$?" == "0" ]; then 
+  echo "Access: http://[server_ip]:9000"
+  echo "Username: $PORTAINER_USERNAME"
+  echo "Password: $PORTAINER_PASSWORD" 
+fi
