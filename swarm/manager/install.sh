@@ -108,13 +108,17 @@ bash /var/lib/docker/volumes/manager/_data/portainer/update.sh
 
 
 while true; do 
+    echo "Waiting portainer service"
+    sleep 10
     curl -qsI localhost:9000 > /dev/null
     if [ "$?" == "0" ]; then break; fi
-    echo "waiting portainer service"
-    sleep 10
 done
 
 curl -X POST http://localhost:9000/api/users/admin/init \
   -H 'Content-Type: application/json' \
-  -d "{ \"Username\": \"$PORTAINER_USERNAME\", \"Password\": \"$PORTAINER_PASSWORD\" }"
+  -d "{ \"Username\": \"$PORTAINER_USERNAME\", \"Password\": \"$PORTAINER_PASSWORD\" }" > /dev/null
+
+echo "Portainer started"
+echo "Username: $PORTAINER_USERNAME"
+echo "Password: $PORTAINER_PASSWORD" 
 
