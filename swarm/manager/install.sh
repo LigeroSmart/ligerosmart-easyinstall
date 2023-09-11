@@ -71,6 +71,8 @@ if [ "$install_dockercompose" ]; then
 fi;
 
 ADVERTISE_INTERFACE=${ADVERTISE_INTERFACE:-`ip -br a | grep -v 127.0 |  ip -br a | grep -v 127.0 | head -n 1 | cut -f 1 -d " "`}
+PORTAINER_USERNAME=${PORTAINER_USERNAME:-"admin"}
+PORTAINER_PASSWORD=${PORTAINER_PASSWORD:-"portainer#12"}
 
 echo "Docker Info"
 docker info
@@ -80,6 +82,7 @@ docker network ls
 
 echo "Docker Swarm Init"
 docker swarm init --advertise-addr ${ADVERTISE_INTERFACE}:2377 
+docker swarm update --task-history-limit 1
 
 echo "Docker Ingress network"
 docker network create --driver=overlay web
@@ -90,3 +93,16 @@ docker volume create manager
 echo "Portainer Configuration"
 git clone https://github.com/complemento/portainer/ /var/lib/docker/volumes/manager/_data/portainer
 bash /var/lib/docker/volumes/manager/_data/portainer/update.sh
+
+
+while true; do 
+    curl -qsI localhost:9000 > /dev/null
+    if [ "$?" == "0" ]; then break; fi
+    echo "waiting portainer service"
+    sleep 10
+done
+
+curl -X POST http://localhost:9000/api/users/admin/init \
+  -H 'Content-Type: application/json' \
+  -d "{ \"Username\": \"$PORTAINER_USERNAME\", \"Password\": \"$PORTAINER_PASSWORD\" }"
+
