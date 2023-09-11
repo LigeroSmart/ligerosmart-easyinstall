@@ -70,7 +70,7 @@ if [ "$install_dockercompose" ]; then
     fi;
 fi;
 
-ADVERTISE_INTERFACE=${ADVERTISE_INTERFACE:-`ip -br a | grep -v 127.0 |  ip -br a | grep -v 127.0 | head -n 1 | cut -f 1 -d " "`}
+ADVERTISE_INTERFACE=${ADVERTISE_INTERFACE:-`ip -br a | grep -v 127.0 | head -n 1 | cut -f 1 -d " "`}
 PORTAINER_USERNAME=${PORTAINER_USERNAME:-"admin"}
 PORTAINER_PASSWORD=${PORTAINER_PASSWORD:-"portainer#12"}
 
