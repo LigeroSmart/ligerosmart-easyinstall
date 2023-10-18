@@ -2,7 +2,7 @@
 #
 # Docker Swarm Mode install
 #
-# curl https://get.ligerosmart.com/swarm/manager/ | bash
+# curl https://get.ligerosmart.com/swarm/worker/ | bash
 # 
 
 # commands detection
