@@ -29,7 +29,8 @@ if [ $install_packages ]; then
                     python3-pip \
                     ncdu \
                     htop \
-                    rsync
+                    rsync \
+                    vim
             ;;
 
             yum)
@@ -38,7 +39,8 @@ if [ $install_packages ]; then
                     python3-pip \
                     ncdu \
                     htop \
-                    rsync
+                    rsync \
+                    vim
             ;;
 
             *)
