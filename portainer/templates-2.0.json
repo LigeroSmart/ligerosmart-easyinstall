@@ -127,6 +127,31 @@
 			}]
 		},{
 			"type": 2,
+			"title": "LigeroSmart Automation",
+			"description": "Desenvolvimento de automações integrados com o LigeroSmart e outras aplicações (Docker Swarm)",
+			"note": "Veja mais em <a href='https://docs.ligerosmart.org'>https://docs.ligerosmart.org</a>",
+			"categories": [
+				"Automação",
+				"ServiceDesk"
+			],
+			"platform": "linux",
+			"logo": "https://ligerosmart.com/wp-content/uploads/2019/07/logo-menor-1.png",
+			"repository": {
+				"url": "https://github.com/LigeroSmart/automationt-stack",
+				"stackfile": "docker-compose.yml"
+			},
+			"env": [{
+				"name": "WEBSERVER_FQDN",
+				"label": "Endereço FQDN do ambiente",
+				"description": "Endereço pelo qual o ambiente vai responder. Se o LetsEncrypt estiver ativo no traefik, será o endereço do certificado. Não pode ter mais que 64 caracteres"
+			},{
+				"name": "PROJECT_NAME",
+				"label": "Nome do projeto",
+				"description": "Nome do projeto, sem espaços e sem caracteres especiais, para identificar por exemplo os índices dentro do Elasticsearch",
+				"default": "ligerosmart"
+			}]
+		},{
+			"type": 2,
 			"title": "Ferramentas",
 			"description": "Alguns softwares para manutenção e testes",
 			"note": "Stack com soluções de softwares para manutenção e testes do ambiente como um todo",
