@@ -74,8 +74,7 @@ if [ "$install_dockercompose" ]; then
     fi;
 fi;
 
-## Kernel config for elasticsearch
-echo "The elasticsearch service will not run with max_map_count=$max_map_count. I will try to increase it"
+## Kernel config
 sysctl -w vm.max_map_count=262144
 echo 'vm.max_map_count=262144' > /etc/sysctl.d/elasticsearch.conf
 sysctl vm.overcommit_memory=1
