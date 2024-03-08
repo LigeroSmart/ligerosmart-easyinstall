@@ -74,6 +74,21 @@ if [ "$install_dockercompose" ]; then
     fi;
 fi;
 
+## Kernel config for elasticsearch
+echo "The elasticsearch service will not run with max_map_count=$max_map_count. I will try to increase it"
+sysctl -w vm.max_map_count=262144
+echo 'vm.max_map_count=262144' > /etc/sysctl.d/elasticsearch.conf
+
+# swap config
+cp /etc/fstab /etc/fstab.bkp
+install -o root -g root -m 0600 /dev/null /swapfile1
+dd if=/dev/zero of=/swapfile1 bs=1k count=4096k
+mkswap /swapfile1
+swapon /swapfile1
+echo '/swapfile1          none                  swap    defaults        0 0' >> /etc/fstab
+mount -a
+free -m
+
 echo "Docker Info"
 docker info
 
