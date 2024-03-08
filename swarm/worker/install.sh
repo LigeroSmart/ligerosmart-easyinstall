@@ -79,8 +79,7 @@ echo "The elasticsearch service will not run with max_map_count=$max_map_count. 
 sysctl -w vm.max_map_count=262144
 echo 'vm.max_map_count=262144' > /etc/sysctl.d/elasticsearch.conf
 sysctl vm.overcommit_memory=1
-echo 'vm.overcommit_memory=1' > /etc/sysctl.d/mem.conf
-
+echo 'vm.overcommit_memory=1' > /etc/sysctl.d/redis.conf
 
 # swap config
 cp /etc/fstab /etc/fstab.bkp
