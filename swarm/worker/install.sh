@@ -40,7 +40,8 @@ if [ $install_packages ]; then
                     ncdu \
                     htop \
                     rsync \
-                    vim
+                    vim \
+                    screen
             ;;
 
             *)
