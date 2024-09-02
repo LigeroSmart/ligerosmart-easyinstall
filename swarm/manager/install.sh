@@ -134,7 +134,7 @@ if [ -z "$JWT_TOKEN" ]; then
   exit 1
 fi
 
-sleep 1
+sleep 3
 
 # Obter endpoint ID
 ENDPOINT_ID=$(curl -s -X GET "http://127.0.0.1:9000/api/endpoints" \
