@@ -137,7 +137,7 @@ sleep 5
 
 # Obter endpoint ID
 ENDPOINT_ID=$(curl -s -X GET "http://127.0.0.1:9000/api/endpoints" \
-  -H "Authorization: Bearer $JWT_TOKEN" | grep -oP '(?<="Id":\s*)\d+')
+  -H "Authorization: Bearer $JWT_TOKEN" | grep -oP '(?<="Id":)[^,]*' | head -n 1)
 
 if [ -z "$ENDPOINT_ID" ]; then
   echo "Error: Unable to obtain endpoint ID"
