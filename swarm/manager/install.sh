@@ -106,7 +106,6 @@ echo "Portainer Configuration"
 git clone https://github.com/complemento/portainer/ /var/lib/docker/volumes/manager/_data/portainer
 bash /var/lib/docker/volumes/manager/_data/portainer/update.sh
 
-
 while true; do 
     echo "Waiting for Portainer service"
     sleep 10
@@ -134,14 +133,20 @@ if [ -z "$JWT_TOKEN" ]; then
   exit 1
 fi
 
-sleep 3
-
 # Obter endpoint ID
 ENDPOINT_ID=$(curl -s -X GET "http://127.0.0.1:9000/api/endpoints" \
   -H "Authorization: Bearer $JWT_TOKEN" | grep -oP '(?<="Id":)[^,]*' | head -n 1)
 
 if [ -z "$ENDPOINT_ID" ]; then
   echo "Error: Unable to obtain endpoint ID"
+  exit 1
+fi
+
+# Obter SwarmID
+SWARM_ID=$(docker info --format '{{.Swarm.Cluster.ID}}')
+
+if [ -z "$SWARM_ID" ]; then
+  echo "Error: Unable to obtain SwarmID"
   exit 1
 fi
 
@@ -152,12 +157,11 @@ if [ -f $DOCKER_COMPOSE_PATH ]; then
   STACK_NAME=${STACK_NAME:-"balancer"}
   echo "Creating $STACK_NAME stack from docker-compose.yml"
 
-curl -X POST "http://127.0.0.1:9000/api/stacks?type=1&method=file&endpointId=$ENDPOINT_ID" \
-  -H "Authorization: Bearer $JWT_TOKEN" \
-  -F "Name=$STACK_NAME" \
-  -F "SwarmID=local" \
-  -F "file=@$DOCKER_COMPOSE_PATH" \
-  -F "Env=DOMAIN=${DOMAIN:-ligerosmart.com}"
+  curl -X POST "http://127.0.0.1:9000/api/stacks?type=1&method=file&endpointId=$ENDPOINT_ID" \
+    -H "Authorization: Bearer $JWT_TOKEN" \
+    -F "Name=$STACK_NAME" \
+    -F "SwarmID=$SWARM_ID" \
+    -F "file=@$DOCKER_COMPOSE_PATH"
   
   if [ "$?" == "0" ]; then
     echo ""
