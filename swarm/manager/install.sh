@@ -81,9 +81,8 @@ echo 'vm.max_map_count=262144' > /etc/sysctl.d/elasticsearch.conf
 sysctl -w vm.overcommit_memory=1
 echo 'vm.overcommit_memory=1' > /etc/sysctl.d/redis.conf
 
-ADVERTISE_INTERFACE=${ADVERTISE_INTERFACE:-`ip -br a | grep -v 127.0 | head -n 1 | cut -f 1 -d " "`}
-ADVERTISE_IP=`ip -br a | grep $ADVERTISE_INTERFACE | grep -Eo '[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}'`
-ADVERTISE_IP=${ADVERTISE_IP:-"server_ip"}
+ADVERTISE_ADDR=${ADVERTISE_ADDR:-$(ip -br -4 a | awk '{print $3}' | cut -d'/' -f1 | grep -E '^(10|172\.(1[6-9]|2[0-9]|3[01])|192\.168)\.' | head -n 1)}
+ADVERTISE_ADDR=${ADVERTISE_ADDR:-"server_ip"}
 PORTAINER_USERNAME=${PORTAINER_USERNAME:-"admin"}
 PORTAINER_PASSWORD=${PORTAINER_PASSWORD:-"portainer#12"}
 
@@ -94,7 +93,7 @@ echo "Docker Networks"
 docker network ls
 
 echo "Docker Swarm Init"
-docker swarm init --advertise-addr ${ADVERTISE_INTERFACE}:2377 
+docker swarm init --advertise-addr ${ADVERTISE_ADDR}:2377 
 docker swarm update --task-history-limit 1
 
 echo "Docker Ingress network"
@@ -122,7 +121,7 @@ curl -X POST http://localhost:9000/api/users/admin/init \
   -d "{ \"Username\": \"$PORTAINER_USERNAME\", \"Password\": \"$PORTAINER_PASSWORD\" }" > /dev/null
 
 if [ "$?" == "0" ]; then 
-  echo "Access: http://$ADVERTISE_IP:9000"
+  echo "Access: http://$ADVERTISE_ADDR:9000"
   echo "Username: $PORTAINER_USERNAME"
   echo "Password: $PORTAINER_PASSWORD" 
 fi
