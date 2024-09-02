@@ -137,7 +137,7 @@ sleep 5
 
 # Obter endpoint ID
 ENDPOINT_ID=$(curl -s -X GET "http://127.0.0.1:9000/api/endpoints" \
-  -H "Authorization: Bearer $JWT_TOKEN" | grep -oP '(?<="Id":)[^,]*' | head -n 1)
+  -H "Authorization: Bearer $JWT_TOKEN" | grep -oP '(?<="Id":\s*)\d+')
 
 if [ -z "$ENDPOINT_ID" ]; then
   echo "Error: Unable to obtain endpoint ID"
@@ -173,6 +173,27 @@ if [ -f $DOCKER_COMPOSE_PATH ]; then
   else
     echo "Error creating $STACK_NAME stack"
   fi
+fi
+
+# Adicionar URL para App Templates
+APP_TEMPLATES_URL=${APP_TEMPLATES_URL:-"https://raw.githubusercontent.com/complemento/portainer/local/templates-2.0.json"}
+
+curl -X POST "http://127.0.0.1:9000/api/settings/templates" \
+  -H "Authorization: Bearer $JWT_TOKEN" \
+  -H "Content-Type: application/json" \
+  -d "{
+    \"Title\": \"Custom App Templates\",
+    \"URL\": \"$APP_TEMPLATES_URL\",
+    \"Platform\": \"1\"
+  }"
+
+if [ "$?" == "0" ]; then
+  echo ""
+  echo "#######################################"
+  echo "# App Templates URL added"
+  echo "# URL: $APP_TEMPLATES_URL"
+else
+  echo "Error adding App Templates URL"
 fi
 
 if [ "$PORTAINER_INSTALLED" == "1" ]; then 
