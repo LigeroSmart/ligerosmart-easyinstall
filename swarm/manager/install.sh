@@ -125,7 +125,17 @@ if [ "$?" == "0" ]; then
   PORTAINER_INSTALLED=1
 fi
 
-# Criando uma stack a partir de um arquivo docker-compose.yml no diretório balancer
+# Token JWT
+JWT_TOKEN=$(curl -s -X POST http://127.0.0.1:9000/api/auth \
+  -H 'Content-Type: application/json' \
+  -d "{ \"Username\": \"$PORTAINER_USERNAME\", \"Password\": \"$PORTAINER_PASSWORD\" }" | grep -oP '(?<="jwt":")[^"]*')
+
+if [ -z "$JWT_TOKEN" ]; then
+  echo "Error: Unable to obtain JWT token"
+  exit 1
+fi
+
+# balancer stack
 DOCKER_COMPOSE_PATH="/var/lib/docker/volumes/manager/_data/portainer/balancer/docker-compose.yml"
 
 if [ -f $DOCKER_COMPOSE_PATH ]; then
