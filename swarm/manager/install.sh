@@ -139,12 +139,12 @@ fi
 DOCKER_COMPOSE_PATH="/var/lib/docker/volumes/manager/_data/portainer/balancer/docker-compose.yml"
 
 if [ -f $DOCKER_COMPOSE_PATH ]; then
-  echo "Creating stack balancer from docker-compose.yml"
-  STACK_NAME=${STACK_NAME:-"balancer"}
+  echo "Creating stack from docker-compose.yml"
+  STACK_NAME=${STACK_NAME:-"mystack"}
 
   curl -X POST http://127.0.0.1:9000/api/stacks \
     -H 'Content-Type: application/json' \
-    -H "Authorization: Bearer $(curl -X POST http://127.0.0.1:9000/api/auth -H 'Content-Type: application/json' -d "{ \"Username\": \"$PORTAINER_USERNAME\", \"Password\": \"$PORTAINER_PASSWORD\" }" | jq -r '.jwt')" \
+    -H "Authorization: Bearer $JWT_TOKEN" \
     -d '{
       "Name": "'"$STACK_NAME"'",
       "SwarmID": "local",
