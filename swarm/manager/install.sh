@@ -120,10 +120,36 @@ curl -X POST http://127.0.0.1:9000/api/users/admin/init \
   -H 'Content-Type: application/json' \
   -d "{ \"Username\": \"$PORTAINER_USERNAME\", \"Password\": \"$PORTAINER_PASSWORD\" }" > /dev/null
 
-if [ "$?" == # "0" ]; then 
+if [ "$?" == "0" ]; then 
   echo "#######################################"
   echo "# Portainer installed"
   echo "# Access: http://$ADVERTISE_ADDR:9000"
   echo "# Username: $PORTAINER_USERNAME"
   echo "# Password: $PORTAINER_PASSWORD" 
+fi
+
+# Criando uma stack a partir de um arquivo docker-compose.yml no diretório balancer
+DOCKER_COMPOSE_PATH="/var/lib/docker/volumes/manager/_data/portainer/balancer/docker-compose.yml"
+
+if [ -f $DOCKER_COMPOSE_PATH ]; then
+  echo "Creating stack balancer from docker-compose.yml"
+  STACK_NAME=${STACK_NAME:-"balancer"}
+
+  curl -X POST http://127.0.0.1:9000/api/stacks \
+    -H 'Content-Type: application/json' \
+    -H "Authorization: Bearer $(curl -X POST http://127.0.0.1:9000/api/auth -H 'Content-Type: application/json' -d "{ \"Username\": \"$PORTAINER_USERNAME\", \"Password\": \"$PORTAINER_PASSWORD\" }" | jq -r '.jwt')" \
+    -d '{
+      "Name": "'"$STACK_NAME"'",
+      "SwarmID": "local",
+      "StackFileContent": "'"$(cat $DOCKER_COMPOSE_PATH)"'",
+      "Env": []
+    }'
+  
+  if [ "$?" == "0" ]; then
+    echo "#######################################"
+    echo "# Stack created"
+    echo "# Stack Name: $STACK_NAME"
+  else
+    echo "Error creating stack"
+  fi
 fi
