@@ -163,6 +163,9 @@ fi
 
 
 if [ "$PORTAINER_INSTALLED" == "1" ]; then 
+  echo ""
+  echo ""
+  echo ""
   echo "#######################################"
   echo "# Portainer Access Info:"
   echo "# URL: http://$ADVERTISE_ADDR:9000"
