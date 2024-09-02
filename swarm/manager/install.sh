@@ -126,7 +126,7 @@ fi
 # Obter token JWT
 JWT_TOKEN=$(curl -s -X POST http://127.0.0.1:9000/api/auth \
   -H 'Content-Type: application/json' \
-  -d "{ \"Username\": \"$PORTAINER_USERNAME\", \"Password\": \"$PORTAINER_PASSWORD\" }" | grep -oP '(?<="jwt":")[^"]*')
+  -d "{ \"Username\": \"$PORTAINER_USERNAME\", \"Password\": \"$PORTAINER_PASSWORD\" }" | grep -oP '(?<="jwt":")[^"]*') > /dev/null
 
 if [ -z "$JWT_TOKEN" ]; then
   echo "Error: Unable to obtain JWT token"
@@ -137,7 +137,7 @@ sleep 5
 
 # Obter endpoint ID
 ENDPOINT_ID=$(curl -s -X GET "http://127.0.0.1:9000/api/endpoints" \
-  -H "Authorization: Bearer $JWT_TOKEN" | grep -oP '(?<="Id":)[^,]*' | head -n 1)
+  -H "Authorization: Bearer $JWT_TOKEN" | grep -oP '(?<="Id":)[^,]*' | head -n 1) > /dev/null
 
 if [ -z "$ENDPOINT_ID" ]; then
   echo "Error: Unable to obtain endpoint ID"
@@ -163,7 +163,7 @@ if [ -f $DOCKER_COMPOSE_PATH ]; then
     -H "Authorization: Bearer $JWT_TOKEN" \
     -F "Name=$STACK_NAME" \
     -F "SwarmID=$SWARM_ID" \
-    -F "file=@$DOCKER_COMPOSE_PATH"
+    -F "file=@$DOCKER_COMPOSE_PATH" > /dev/null
   
   if [ "$?" == "0" ]; then
     echo ""
@@ -188,7 +188,7 @@ curl -X PUT "http://127.0.0.1:9000/api/settings" \
     \"EnableTelemetry\":false,
     \"TemplatesURL\":\"$APP_TEMPLATES_URL\",
     \"EdgeAgentCheckinInterval\":5
-  }"
+  }" > /dev/null
 
 if [ "$?" == "0" ]; then
   echo ""
