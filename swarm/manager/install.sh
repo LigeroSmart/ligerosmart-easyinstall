@@ -157,7 +157,7 @@ if [ -f $DOCKER_COMPOSE_PATH ]; then
     echo "# Stack created"
     echo "# Stack Name: $STACK_NAME"
   else
-    echo "Error creating stack"
+    echo "Error creating balancer stack"
   fi
 fi
 
