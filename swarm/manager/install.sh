@@ -157,7 +157,7 @@ curl -X POST "http://127.0.0.1:9000/api/stacks?type=1&method=file&endpointId=$EN
   -F "Name=$STACK_NAME" \
   -F "SwarmID=local" \
   -F "file=@$DOCKER_COMPOSE_PATH" \
-  -F "Env=[]"
+  -F "Env=DOMAIN=${DOMAIN:-ligerosmart.com}"
   
   if [ "$?" == "0" ]; then
     echo ""
