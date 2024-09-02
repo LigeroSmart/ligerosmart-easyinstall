@@ -108,10 +108,10 @@ bash /var/lib/docker/volumes/manager/_data/portainer/update.sh
 
 
 while true; do 
-    echo "Waiting portainer service"
+    echo "Waiting for Portainer service"
     sleep 10
     curl -qsI 127.0.0.1:9000 > /dev/null
-    if [ "$?" == "0" ]; then break; fi
+    if [ "$?" == "0" ];then break; fi
 done
 
 echo "Portainer started"
@@ -120,12 +120,11 @@ curl -X POST http://127.0.0.1:9000/api/users/admin/init \
   -H 'Content-Type: application/json' \
   -d "{ \"Username\": \"$PORTAINER_USERNAME\", \"Password\": \"$PORTAINER_PASSWORD\" }" > /dev/null
 
-
 if [ "$?" == "0" ]; then 
   PORTAINER_INSTALLED=1
 fi
 
-# Token JWT
+# Obter token JWT
 JWT_TOKEN=$(curl -s -X POST http://127.0.0.1:9000/api/auth \
   -H 'Content-Type: application/json' \
   -d "{ \"Username\": \"$PORTAINER_USERNAME\", \"Password\": \"$PORTAINER_PASSWORD\" }" | grep -oP '(?<="jwt":")[^"]*')
@@ -135,9 +134,14 @@ if [ -z "$JWT_TOKEN" ]; then
   exit 1
 fi
 
+# Obter endpoint ID
 ENDPOINT_ID=$(curl -s -X GET "http://127.0.0.1:9000/api/endpoints" \
   -H "Authorization: Bearer $JWT_TOKEN" | grep -oP '(?<="Id":)[^,]*' | head -n 1)
 
+if [ -z "$ENDPOINT_ID" ]; then
+  echo "Error: Unable to obtain endpoint ID"
+  exit 1
+fi
 
 # balancer stack
 DOCKER_COMPOSE_PATH="/var/lib/docker/volumes/manager/_data/portainer/balancer/docker-compose.yml"
@@ -146,7 +150,7 @@ if [ -f $DOCKER_COMPOSE_PATH ]; then
   STACK_NAME=${STACK_NAME:-"balancer"}
   echo "Creating $STACK_NAME stack from docker-compose.yml"
 
-  curl -X POST "http://127.0.0.1:9000/api/stacks?method=file&type=1&endpointId=$ENDPOINT_ID" \
+  curl -X POST "http://127.0.0.1:9000/api/stacks?type=1&method=file&endpointId=$ENDPOINT_ID" \
     -H "Authorization: Bearer $JWT_TOKEN" \
     -F "Name=$STACK_NAME" \
     -F "SwarmID=local" \
@@ -161,7 +165,6 @@ if [ -f $DOCKER_COMPOSE_PATH ]; then
     echo "Error creating $STACK_NAME stack"
   fi
 fi
-
 
 if [ "$PORTAINER_INSTALLED" == "1" ]; then 
   echo ""
