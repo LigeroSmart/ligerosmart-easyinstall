@@ -153,6 +153,7 @@ if [ -f $DOCKER_COMPOSE_PATH ]; then
     }'
   
   if [ "$?" == "0" ]; then
+    echo ""
     echo "#######################################"
     echo "# Stack created"
     echo "# Stack Name: $STACK_NAME"
