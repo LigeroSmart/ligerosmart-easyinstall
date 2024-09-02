@@ -135,6 +135,10 @@ if [ -z "$JWT_TOKEN" ]; then
   exit 1
 fi
 
+ENDPOINT_ID=$(curl -s -X GET "http://127.0.0.1:9000/api/endpoints" \
+  -H "Authorization: Bearer $JWT_TOKEN" | grep -oP '(?<="Id":)[^,]*' | head -n 1)
+
+
 # balancer stack
 DOCKER_COMPOSE_PATH="/var/lib/docker/volumes/manager/_data/portainer/balancer/docker-compose.yml"
 
@@ -142,7 +146,7 @@ if [ -f $DOCKER_COMPOSE_PATH ]; then
   STACK_NAME=${STACK_NAME:-"balancer"}
   echo "Creating $STACK_NAME stack from docker-compose.yml"
 
-  curl -X POST "http://127.0.0.1:9000/api/stacks?method=file&type=1&endpointId=1" \
+  curl -X POST "http://127.0.0.1:9000/api/stacks?method=file&type=1&endpointId=$ENDPOINT_ID" \
     -H "Authorization: Bearer $JWT_TOKEN" \
     -F "Name=$STACK_NAME" \
     -F "SwarmID=local" \
