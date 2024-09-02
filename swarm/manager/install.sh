@@ -142,15 +142,11 @@ if [ -f $DOCKER_COMPOSE_PATH ]; then
   STACK_NAME=${STACK_NAME:-"balancer"}
   echo "Creating $STACK_NAME stack from docker-compose.yml"
 
-  curl -X POST "http://127.0.0.1:9000/api/stacks?method=string&type=1&endpointId=1" \
-    -H 'Content-Type: application/json' \
+  curl -X POST "http://127.0.0.1:9000/api/stacks?method=file&type=1" \
     -H "Authorization: Bearer $JWT_TOKEN" \
-    -d '{
-      "Name": "'"$STACK_NAME"'",
-      "SwarmID": "local",
-      "StackFileContent": "'"$(cat $DOCKER_COMPOSE_PATH)"'",
-      "Env": []
-    }'
+    -F "Name=$STACK_NAME" \
+    -F "SwarmID=local" \
+    -F "file=@$DOCKER_COMPOSE_PATH"
   
   if [ "$?" == "0" ]; then
     echo ""
