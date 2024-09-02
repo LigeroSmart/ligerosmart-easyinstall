@@ -120,14 +120,6 @@ curl -X POST http://127.0.0.1:9000/api/users/admin/init \
   -H 'Content-Type: application/json' \
   -d "{ \"Username\": \"$PORTAINER_USERNAME\", \"Password\": \"$PORTAINER_PASSWORD\" }" > /dev/null
 
-if [ "$?" == "0" ]; then 
-  echo "#######################################"
-  echo "# Portainer installed"
-  echo "# Access: http://$ADVERTISE_ADDR:9000"
-  echo "# Username: $PORTAINER_USERNAME"
-  echo "# Password: $PORTAINER_PASSWORD" 
-fi
-
 # Criando uma stack a partir de um arquivo docker-compose.yml no diretório balancer
 DOCKER_COMPOSE_PATH="/var/lib/docker/volumes/manager/_data/portainer/balancer/docker-compose.yml"
 
@@ -152,4 +144,13 @@ if [ -f $DOCKER_COMPOSE_PATH ]; then
   else
     echo "Error creating stack"
   fi
+fi
+
+
+if [ "$?" == "0" ]; then 
+  echo "#######################################"
+  echo "# Portainer Access Info:"
+  echo "# URL: http://$ADVERTISE_ADDR:9000"
+  echo "# Username: $PORTAINER_USERNAME"
+  echo "# Password: $PORTAINER_PASSWORD" 
 fi
