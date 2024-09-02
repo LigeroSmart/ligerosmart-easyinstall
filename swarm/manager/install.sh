@@ -177,14 +177,17 @@ fi
 
 # Adicionar URL para App Templates
 APP_TEMPLATES_URL=${APP_TEMPLATES_URL:-"https://raw.githubusercontent.com/complemento/portainer/local/templates-2.0.json"}
+LOGO_URL=${LOGO_URL:-"https://servicedesk.complemento.net.br/otrs-web/skins/Customer/complemento16/img/ligerologo.png"}
 
-curl -X POST "http://127.0.0.1:9000/api/settings/templates" \
+curl -X PUT "http://127.0.0.1:9000/api/settings" \
+  -H 'Content-Type: application/json' \
   -H "Authorization: Bearer $JWT_TOKEN" \
-  -H "Content-Type: application/json" \
   -d "{
-    \"Title\": \"Custom App Templates\",
-    \"URL\": \"$APP_TEMPLATES_URL\",
-    \"Platform\": \"1\"
+    \"SnapshotInterval\":\"5m\",
+    \"LogoURL\":\"$LOGO_URL\",
+    \"EnableTelemetry\":false,
+    \"TemplatesURL\":\"$APP_TEMPLATES_URL\",
+    \"EdgeAgentCheckinInterval\":5
   }"
 
 if [ "$?" == "0" ]; then
