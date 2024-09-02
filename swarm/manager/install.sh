@@ -142,7 +142,7 @@ if [ -f $DOCKER_COMPOSE_PATH ]; then
   STACK_NAME=${STACK_NAME:-"balancer"}
   echo "Creating $STACK_NAME stack from docker-compose.yml"
 
-  curl -X POST http://127.0.0.1:9000/api/stacks \
+  curl -X POST "http://127.0.0.1:9000/api/stacks?method=string&type=1&endpointId=1" \
     -H 'Content-Type: application/json' \
     -H "Authorization: Bearer $JWT_TOKEN" \
     -d '{
