@@ -139,7 +139,7 @@ fi
 DOCKER_COMPOSE_PATH="/var/lib/docker/volumes/manager/_data/portainer/balancer/docker-compose.yml"
 
 if [ -f $DOCKER_COMPOSE_PATH ]; then
-  echo "Creating stack from docker-compose.yml"
+  echo "Creating balancer stack from docker-compose.yml"
   STACK_NAME=${STACK_NAME:-"mystack"}
 
   curl -X POST http://127.0.0.1:9000/api/stacks \
