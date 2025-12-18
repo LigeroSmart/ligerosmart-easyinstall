@@ -7,6 +7,8 @@ set -e
 
 cd /opt/otrs
 
+git config --global user.email "otrs@localhost"
+
 curl https://raw.githubusercontent.com/LigeroSmart/ligerosmart-easyinstall/main/core/fix-ola/0001-fix-OLA-Suspend.patch > /tmp/0001-fix-OLA-Suspend.patch
 
 git apply /tmp/0001-fix-OLA-Suspend.patch
