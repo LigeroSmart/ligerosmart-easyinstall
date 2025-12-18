@@ -1,6 +1,6 @@
 #!/bin/bash
 #
-# curl https://get.ligerosmart.com/core/fix-ola/ | bash
+# curl -s https://get.ligerosmart.com/core/fix-ola/ | bash
 # 
 
 set -e
@@ -20,9 +20,9 @@ if grep -q "Check if current state is in the paused SLA states list" Kernel/Syst
     exit 0
 fi
 
-curl https://raw.githubusercontent.com/LigeroSmart/ligerosmart-easyinstall/main/core/fix-ola/0001-fix-OLA-Suspend.patch > /tmp/0001-fix-OLA-Suspend.patch
+curl -s https://raw.githubusercontent.com/LigeroSmart/ligerosmart-easyinstall/main/core/fix-ola/0001-fix-OLA-Suspend.patch > /tmp/0001-fix-OLA-Suspend.patch
 
-git apply /tmp/0001-fix-OLA-Suspend.patch
+git apply --whitespace=nowarn /tmp/0001-fix-OLA-Suspend.patch 2>&1 | grep -v "trailing whitespace" | grep -v "whitespace errors" | grep -v "squelched" || true
 
 git add Kernel/System/GenericAgent/SetSolutionTimeField.pm
 git add Kernel/System/Ticket/TicketExtensionsStopEscalation.pm
