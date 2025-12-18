@@ -119,10 +119,10 @@ docker -v
 docker-compose -v
 
 # force pull images
-docker-compose pull
+docker compose pull
 
 # download and run at first time 
-docker-compose up -d
+docker compose up -d
 
 # stack info
 cat README.md
