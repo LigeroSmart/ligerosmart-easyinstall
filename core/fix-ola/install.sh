@@ -5,7 +5,7 @@
 
 set -e
 
-cd /opt/otrs
+#cd /opt/otrs
 
 # Configura user.email apenas se não estiver definido
 if [ -z "$(git config --global user.email)" ]; then
